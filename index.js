@@ -7,7 +7,10 @@ require('dotenv').config();
 const cors = require('cors');
 
 
-console.log(process.env);
+//? importar el path para las redireccion de todo
+const path = require('path');
+
+
 
 
 //*Crear el servidor de express
@@ -39,7 +42,11 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'))
 
 
-
+//con esto hacemos que cualquier peticion lo lleve a servir 
+//el contenido que tenemos en el index.html
+app.use('*', (req, res) => {
+    res.sendFile( path.join( __dirname, 'public/index.html' ) );
+})
 
 
 
